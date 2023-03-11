@@ -17,3 +17,17 @@ function createImagesModalMarkup(galleryItems) {
 }
 
 console.log(galleryItems);
+
+// document.querySelector(".gallery").onclick = () => {
+//   basicLightbox
+//     .create(
+//       `
+//         <div class="gallery__item">
+//             <a class="gallery__link" href="${original}">
+//               <img class="gallery__image" src="${preview}" data-source="${original}" alt="${description}"/>
+//             </a>
+//         </div>
+// 	    `
+//     )
+//     .show();
+// };
