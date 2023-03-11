@@ -34,10 +34,10 @@ const instance = basicLightbox.create(
   `<img width='1280' heigth='auto' src=''>`,
   {
     onShowImage: (instance) => {
-      window.addEventListener("keydown", onEscClick);
+      window.addEventListener("click", onImageClick);
     },
     onCloseImage: (instance) => {
-      window.removeEventListener("keydown", onEscClick);
+      window.removeEventListener("keydown", onEscapePress);
     },
   }
 );
@@ -52,11 +52,11 @@ function onImageClick(event) {
   instance.show();
 }
 
-function onEscClick(event) {
+function onEscapePress(event) {
   if (event.code !== "Escape") {
     return;
   }
   instance.close();
 }
 
-console.log(galleryItems);
+console.log(onImageClick);
