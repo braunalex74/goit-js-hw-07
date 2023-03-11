@@ -6,40 +6,57 @@ imageContainer.insertAdjacentHTML("beforeend", imagesMarkup);
 imageContainer.addEventListener("click", onImageClick);
 
 function createImagesModalMarkup(galleryItems) {
-  return galleryItems.map(({ preview, original, description }) => {
-    return `
+  return galleryItems
+    .map(({ preview, original, description }) => {
+      return `
     <div class="gallery__item">
       <a class="gallery__link" href="${original}">
         <img class="gallery__image" src="${preview}" data-source="${original}" alt="${description}"/>
       </a>
     </div>`;
-  });
+    })
+    .join("");
 }
+
+// const instatce = basicLightbox.create(
+//   `<img width='1280' heigth='auto' src=''>`,
+//   {
+//     onShowImage: (instance) => {
+//       window.addEventListener("click", onClick);
+//     },
+//     onCloseImage: (instance) => {
+//       window.removeEventListener("click", onClick);
+//     },
+//   }
+// );
+
+const instance = basicLightbox.create(
+  `<img width='1280' heigth='auto' src=''>`,
+  {
+    onShowImage: (instance) => {
+      window.addEventListener("keydown", onEscClick);
+    },
+    onCloseImage: (instance) => {
+      window.removeEventListener("keydown", onEscClick);
+    },
+  }
+);
 
 function onImageClick(event) {
-  const isImageEl = event.target.classList.contains("gallery__image");
-  if (!isImageEl) {
+  event.preventDefault();
+  const imageDataSet = event.target.dataset.source;
+  if (!imageDataSet) {
     return;
   }
-
-  const currentActiveImage = document.querySelector(".gallery.gallery__image");
-  if (currentActiveImage) {
-    currentActiveImage.classList.remove("gallery__image");
-  }
+  instance.element().querySelector("img").src = imageDataSet;
+  instance.show();
 }
 
-console.log(customElements);
+function onEscClick(event) {
+  if (event.code !== "Escape") {
+    return;
+  }
+  instance.close();
+}
 
-// document.querySelector(".gallery").onclick = () => {
-//   basicLightbox
-//     .create(
-//       `
-//         <div class="gallery__item">
-//             <a class="gallery__link" href="${original}">
-//               <img class="gallery__image" src="${preview}" data-source="${original}" alt="${description}"/>
-//             </a>
-//         </div>
-// 	    `
-//     )
-//     .show();
-// };
+console.log(galleryItems);
