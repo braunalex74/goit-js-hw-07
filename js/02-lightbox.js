@@ -18,7 +18,7 @@ function createImagesModalMarkup(galleryItems) {
     .join("");
 }
 
-const loghtbox = new SimpleLightbox(".gallery a", {
+const lightbox = new SimpleLightbox(".gallery a", {
   captionsData: "alt",
   captionPosition: "bottom",
   captionDelay: 250,
@@ -30,8 +30,6 @@ function onImageClick(event) {
   if (!imageDataSet) {
     return;
   }
-  instance.element().querySelector("img").src = imageDataSet;
-  instance.show();
 }
 
 console.log(galleryItems);
