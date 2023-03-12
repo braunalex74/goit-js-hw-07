@@ -10,12 +10,27 @@ function createImagesModalMarkup(galleryItems) {
     .map(({ preview, original, description }) => {
       return `
     <div class="gallery__item">
-        <a class="gallery__item" href="${original}">
-            <img class="gallery__image" src="${preview}" alt="${description}" />
-        </a>
+      <a class="gallery__link" href="${original}">
+        <img class="gallery__image" src="${preview}" alt="${description}"/>
+      </a>
     </div>`;
     })
     .join("");
+}
+
+const loghtbox = new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionDelay: 250,
+});
+
+function onImageClick(event) {
+  event.preventDefault();
+  const imageDataSet = event.target.dataset.source;
+  if (!imageDataSet) {
+    return;
+  }
+  instance.element().querySelector("img").src = imageDataSet;
+  instance.show();
 }
 
 console.log(galleryItems);
