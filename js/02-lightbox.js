@@ -20,6 +20,7 @@ function createImagesModalMarkup(galleryItems) {
 
 const loghtbox = new SimpleLightbox(".gallery a", {
   captionsData: "alt",
+  captionPosition: "bottom",
   captionDelay: 250,
 });
 
