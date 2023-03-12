@@ -59,4 +59,4 @@ function onEscapePress(event) {
   instance.close();
 }
 
-console.log(onImageClick);
+console.log(galleryItems);
